@@ -1,0 +1,39 @@
+name: "PackNPush"
+description: "A GitHub Action to bump package versions based on commit messages or automatically, and publish to a NuGet feed."
+author: "FrostyApeOne"
+inputs:
+  github-token:
+    description: "GitHub token to authenticate with the repository."
+    required: true
+  nuget-source:
+    description: "NuGet source URL where the package will be published."
+    required: true
+  package-id:
+    description: "The package ID to check and update the version for."
+    required: true
+  work-directory:
+    description: "The directory where the .NET project resides."
+    required: true
+  version-prefix:
+    description: "Prefix to use when tagging commits (optional)."
+    required: false
+    default: "processed-"
+  commit-range:
+    description: "Number of commits to check for version bump message (default is 10)."
+    required: false
+    default: "10"
+  no-build:
+    description: "Set to 'true' to skip the build during the dotnet pack command (default is 'false')."
+    required: false
+    default: "false"    
+  pack-and-publish:
+    description: "Set to 'true' to enable packing and publishing the NuGet package (default is 'true')."
+    required: false
+    default: "true"    
+runs:
+  using: "node20"
+  main: "dist/index.js"
+  
+branding:
+  icon: "package"
+  color: "blue"  
